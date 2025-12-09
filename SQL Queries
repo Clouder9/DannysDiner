@@ -1,0 +1,14 @@
+-- 1. What is the total amount each customer spent at the restaurant?
+SELECT sales.customer_id,
+       SUM(menu.price) AS Total_Spend
+  FROM sales
+       JOIN
+       menu ON sales.product_id = menu.product_id
+ GROUP BY sales.customer_id;
+
+-- 2. How many days has each customer visited the restaurant?
+SELECT customer_id,
+       COUNT( * ) AS Visits
+  FROM sales
+ GROUP BY customer_id;
+
