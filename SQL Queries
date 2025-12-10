@@ -12,3 +12,14 @@ SELECT customer_id,
   FROM sales
  GROUP BY customer_id;
 
+-- 3. What was the first item from the menu purchased by each customer?
+SELECT DISTINCT s.customer_id,
+                menu.product_name
+  FROM sales s
+       JOIN
+       menu ON s.product_id = menu.product_id
+ WHERE s.order_date = (
+                          SELECT MIN(order_date) 
+                            FROM sales
+                           WHERE customer_id = s.customer_id
+                      );
